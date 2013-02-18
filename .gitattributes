@@ -1,0 +1,27 @@
+# Handle line endings automatically for files detected as text
+# and leave all files detected as binary untouched.
+* text eol=lf
+
+#
+# The above will handle all files NOT found below
+#
+# These files are text and should be normalized (Convert crlf => lf)
+Gemfile eol=lf
+Rakefile eol=lf
+Vagrantfile eol=lf
+*.rb eol=lf
+*.md eol=lf
+*.gemspec eol=lf
+*.lock eol=lf
+*.txt eol=lf
+*.yml eol=lf
+*.yaml eol=lf
+*.prefs eol=lf
+
+# Eclipse specific files
+*.project eol=lf
+*.buildpath eol=lf
+
+# These files are binary and should be left untouched
+# (binary is a macro for -text -diff)
+*.gem binary
