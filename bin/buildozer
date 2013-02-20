@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require 'buildozer/cli/buildozer'
+
+Buildozer::Cli::Buildozer.start()

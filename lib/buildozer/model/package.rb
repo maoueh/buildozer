@@ -2,7 +2,7 @@ module Buildozer
   module Model
     class Package
       attr_accessor :name, :version, :revision, :archive, :url,
-                    :provides, :dependencies, :includes
+                    :provides, :depends, :includes
 
       def initialize(options)
         @name = options.fetch(:name)
@@ -12,7 +12,7 @@ module Buildozer
         @url = options.fetch(:url)
 
         @provides = options.fetch(:provides, [])
-        @dependencies = options.fetch(:dependencies, [])
+        @depends = options.fetch(:depends, [])
 
         @includes = options.fetch(:includes, [])
       end
