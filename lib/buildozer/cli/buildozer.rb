@@ -8,7 +8,7 @@ module Buildozer
 
       desc "rpm FILE", "Build a rpm package using fpm"
       def rpm(file)
-        definition = Dsl.compile(dsl)
+        definition = Dsl.compile(file)
 
         definition.packages.each do |package|
           builder = Builder::Rpm.new(package,  "/tmp")
