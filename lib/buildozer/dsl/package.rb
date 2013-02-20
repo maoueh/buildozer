@@ -1,6 +1,8 @@
+require 'buildozer/dsl/fragment'
+
 module Buildozer
-  module Package
-    class Descriptor
+  module Dsl
+    class Package < Fragment
       def initialize(name, &block)
         @name = name
         @provides = []
@@ -19,8 +21,8 @@ module Buildozer
         @version = version
       end
 
-      def package(package)
-        @package = package
+      def archive(archive)
+        @archive = archive
       end
 
       def depends(package)
@@ -29,6 +31,14 @@ module Buildozer
 
       def provides(package)
         @provides << package
+      end
+
+      def includes(entry)
+        @incudes << entry
+      end
+
+      def type()
+        return :package
       end
     end
   end
