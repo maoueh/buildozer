@@ -7,15 +7,15 @@ require 'test/unit'
 module Buildozer
   module Dsl
     class TestCompiler < Test::Unit::TestCase
-      def load(definition_filename)
+      def compile(definition_filename)
         path = File.expand_path("#{File.dirname(__FILE__)}/../../../resources/#{definition_filename}")
+        fragment = Dsl.load(path)
 
-        return Dsl.load(path)
+        return Compiler.compile(fragment)
       end
 
       def test_compile()
-        fragment = load("package_descriptor1.bd.rb")
-        definition = Compiler.compile(fragment)
+        definition = compile("definition_full.bd.rb")
         assert(definition.instance_of?(Model::Definition))
 
         packages = definition.packages
@@ -45,6 +45,13 @@ module Buildozer
         assert_raise(Compiler::InvalidDslDefinition) do
           Compiler.compile(Definition.new())
         end
+      end
+
+      def test_no_includes()
+        definition = compile("definition_no_includes.bd.rb")
+        package = definition.packages.first
+
+        assert_equal([], package.includes)
       end
     end
 

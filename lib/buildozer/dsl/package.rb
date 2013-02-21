@@ -7,6 +7,7 @@ module Buildozer
         @name = name
         @provides = []
         @depends = []
+        @includes = []
 
         if block_given?
           instance_eval(&block)
@@ -38,7 +39,7 @@ module Buildozer
       end
 
       def includes(entry)
-        @incudes << entry
+        @includes << entry
       end
 
       def type()
