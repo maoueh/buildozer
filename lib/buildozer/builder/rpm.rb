@@ -17,6 +17,8 @@ module Buildozer
         buffer << " -C \"#{@directory}\""
         buffer << " -p \"#{name()}\""
 
+        buffer << " -m \"#{@package.maintainer}\"" if @package.maintainer
+
         @package.provides.each do |provide|
           buffer << " --provides \"#{provide}\""
         end

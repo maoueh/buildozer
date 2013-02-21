@@ -26,6 +26,7 @@ module Buildozer
         assert_equal("http://www.erlang.org/download/otp_src_R15B03-1.tar.gz", package.url)
         assert_equal("R15B03", package.version)
         assert_equal("erlang-R15B03", package.archive)
+        assert_equal("Nu Echo (Matthieu Vachon)", package.maintainer)
       end
 
       def test_invalid_fragment_no_type()

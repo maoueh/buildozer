@@ -25,6 +25,10 @@ module Buildozer
         @archive = archive
       end
 
+      def maintainer(maintainer)
+        @maintainer = maintainer
+      end
+
       def depends(package)
         @depends << package
       end
