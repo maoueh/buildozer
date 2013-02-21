@@ -1,4 +1,6 @@
+require 'buildozer/builder/exceptions'
 require 'buildozer/builder/rpm'
+require 'buildozer/dsl/compiler'
 require 'buildozer/model/package'
 require 'test/unit'
 
@@ -10,6 +12,7 @@ module Buildozer
           :name => "dummy",
           :version => "1.5.2",
           :url => "http://localhost/archive.tar.gz",
+          :includes => ["usr/bin"],
         }
       end
 
@@ -29,6 +32,14 @@ module Buildozer
         command = Builder::Rpm.new(package, ".").command()
 
         assert(command =~ /-m "Joe Armstrong"/)
+      end
+
+      def test_package_no_includes()
+        package = base_package({:includes => []})
+
+        assert_raise(Builder::InvalidRpmPackage) do
+          Builder::Rpm.new(package, ".")
+        end
       end
     end
   end

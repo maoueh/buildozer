@@ -1,3 +1,4 @@
+require 'buildozer/builder/exceptions'
 require 'stringio'
 
 module Buildozer
@@ -6,6 +7,12 @@ module Buildozer
       def initialize(package, directory)
         @package = package
         @directory = directory
+
+        validate()
+      end
+
+      def build()
+        system(command())
       end
 
       def command()
@@ -35,7 +42,13 @@ module Buildozer
       end
 
       def name()
-        "#{@package.archive}_ARCH.el6.rpm"
+        "#{@package.archive}_ARCH.rpm"
+      end
+
+      def validate()
+        if @package.includes.empty?()
+          raise Builder::InvalidRpmPackage, "Invalid rpm package, must have at least on 'includes'"
+        end
       end
     end
   end
