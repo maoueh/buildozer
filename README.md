@@ -13,6 +13,23 @@ Use this command to install buildozer:
 
     gem install buildozer
 
+## Versioning
+
+A small note about versioning of this project. Backward compatibility
+for users will be kept for major version. That means that your definition
+files are guaranteed to work for version `1.y.z`. The day we release
+`2.y.z`, it will not be backward compatible with major version lower
+than 2.
+
+Internal representation will be backward compatible for minor version.
+That means that if your are using buildozer as a library, you can follow
+`x.1.z` whitout fear of breaking your code. However, changing from `x.1.z`
+to `x.2.z` will likely requires changes on your part.
+
+Finally, new additions and changes that are backward compatible for users
+and developers will be made on the revision version. For example, `x.y.3`
+will be compatible with `x.y.4`.
+
 ## Usage
 
 The meats that feeds every buildozer command is the definition. The
