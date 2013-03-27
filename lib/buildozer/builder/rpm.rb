@@ -15,6 +15,10 @@ module Buildozer
         system(command())
       end
 
+      def show()
+        puts(command())
+      end
+
       def command()
         buffer = StringIO.new
 
@@ -47,7 +51,7 @@ module Buildozer
 
       def validate()
         if @package.includes.empty?()
-          raise Builder::InvalidRpmPackage, "Invalid rpm package, must have at least on 'includes'"
+          raise Builder::InvalidRpmPackage, "Invalid rpm package, must have at least one 'includes'"
         end
       end
     end
