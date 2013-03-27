@@ -12,6 +12,11 @@ module Buildozer
         send("compile_#{fragment.type()}", fragment)
       end
 
+      ##
+      # Function that receives a dsl definition and compile
+      # it to a model definition. This compilation is done
+      # mainly to report user-friendly error when dsl
+      # definition is invalid
       def self.compile_definition(definition)
         Validator.validate_definition(definition);
 
@@ -21,6 +26,11 @@ module Buildozer
         })
       end
 
+      ##
+      # Function that receives a dsl package and compile
+      # it to a model package. This compilation is done
+      # mainly to report user-friendly error when dsl
+      # package is invalid
       def self.compile_package(package)
         Validator.validate_package(package);
 

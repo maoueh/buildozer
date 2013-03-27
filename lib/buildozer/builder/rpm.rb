@@ -30,6 +30,10 @@ module Buildozer
 
         buffer << " -m \"#{@package.maintainer}\"" if @package.maintainer
 
+        if @package.architecture and not @package.architecture == :auto
+          buffer << " -a \"#{@package.architecture}\""
+        end
+
         @package.provides.each do |provide|
           buffer << " --provides \"#{provide}\""
         end

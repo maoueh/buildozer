@@ -4,11 +4,9 @@ package "erlang" do
   version "R15B03"
   maintainer "Nu Echo (Matthieu Vachon)"
 
-  architecture "i989"
+  architecture :auto
 
   provides "erlang"
 
   depends "libc.so6"
-
-  includes "usr/bin"
 end

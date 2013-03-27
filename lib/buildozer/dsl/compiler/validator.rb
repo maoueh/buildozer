@@ -45,6 +45,20 @@ module Buildozer
           if not options.has_key?(:url)
             raise InvalidDslPackage, "Invalid package, must have an 'url'"
           end
+
+          if options.has_key?(:architecture)
+            architecture = options[:architecture]
+
+            validate_architecture(architecture)
+          end
+        end
+
+        def self.validate_architecture(architecture)
+          if architecture == :auto or (architecture.kind_of?(String) and not architecture == "")
+            return
+          end
+
+          raise InvalidDslPackage, "Invalid package, architecture must be :auto or a non-empty String, currently [#{architecture}]"
         end
       end
     end

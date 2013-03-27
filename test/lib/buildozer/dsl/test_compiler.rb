@@ -26,6 +26,7 @@ module Buildozer
         assert_equal("http://www.erlang.org/download/otp_src_R15B03-1.tar.gz", package.url)
         assert_equal("R15B03", package.version)
         assert_equal("erlang-R15B03", package.archive)
+        assert_equal("i989", package.architecture)
         assert_equal("Nu Echo (Matthieu Vachon)", package.maintainer)
       end
 
@@ -52,6 +53,21 @@ module Buildozer
         package = definition.packages.first
 
         assert_equal([], package.includes)
+      end
+
+      def test_architecture_auto()
+        definition = compile("definition_architecture_auto.bd.rb")
+        packages = definition.packages
+        assert_equal(1, packages.size())
+
+        package = packages[0]
+        assert_equal(:auto, package.architecture)
+      end
+
+      def test_invalid_architecture()
+        assert_raise(Compiler::InvalidDslPackage) do
+          compile("definition_invalid_architecture.bd.rb")
+        end
       end
     end
 

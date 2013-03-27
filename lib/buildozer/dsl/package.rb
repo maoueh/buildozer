@@ -5,6 +5,9 @@ module Buildozer
     class Package < Fragment
       def initialize(name, &block)
         @name = name
+
+        @architecture = :auto
+
         @provides = []
         @depends = []
         @includes = []
@@ -28,6 +31,10 @@ module Buildozer
 
       def maintainer(maintainer)
         @maintainer = maintainer
+      end
+
+      def architecture(architecture)
+        @architecture = architecture
       end
 
       def depends(package)
