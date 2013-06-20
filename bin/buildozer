@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
-require 'buildozer/cli/buildozer'
+require 'buildozer/cli/buildozer/root'
 
-Buildozer::Cli::Buildozer.start()
+buildozer = Buildozer::Cli::Buildozer::Root.new(ARGV)
+buildozer.run()

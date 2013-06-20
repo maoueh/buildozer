@@ -26,7 +26,6 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
 
   gem.add_dependency "fpm", "~> 0.4.29"
-  gem.add_dependency "thor", "~> 0.17.0"
 
   gem.add_development_dependency "rake", "~> 10.0.3"
 end
