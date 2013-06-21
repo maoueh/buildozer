@@ -6,6 +6,8 @@ module Buildozer
   module Cli
     module Core
       class Base
+        @@MAX_WIDTH = 70
+
         def initialize(arguments = ARGV, options = {})
           @arguments = arguments
         end
@@ -72,6 +74,16 @@ module Buildozer
           exit(0)
         end
 
+        ##
+        # Print an error message followed by the parser
+        # help.
+        def error(message)
+          puts "ERROR: #{message}"
+          puts ""
+
+          help()
+        end
+
         def run()
           @parser = parser()
           @arguments = parser.parse(@arguments)
@@ -100,14 +112,14 @@ module Buildozer
         def set_description(parser)
           set_text(description(), parser,
             :prepend_newline => true,
-            :max_width => 80
+            :max_width => @@MAX_WIDTH
           )
         end
 
         def set_tail(parser)
           set_text(tail(), parser,
             :prepend_newline => true,
-            :max_width => 80
+            :max_width => @@MAX_WIDTH
           )
         end
 

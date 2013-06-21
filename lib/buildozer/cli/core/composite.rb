@@ -7,7 +7,7 @@ module Buildozer
         def initialize(arguments = ARGV)
           super(arguments)
 
-          @arguments, @command, @sub_arguments = split_arguments(arguments)
+          @arguments, @command, @subarguments = split_arguments(arguments)
           @subcommands = subcommands()
 
           raise "You must provide at least one subcommand in #{self.class}" if !@subcommands || @subcommands.empty?()
@@ -46,8 +46,10 @@ module Buildozer
           @parser = parser()
           @arguments = parser.parse(@arguments)
 
-          command_class = @subcommands[@command.to_sym] if @command
-          return help() if !command_class || !@command
+          return help() if not @command
+
+          command_class = @subcommands[@command.to_sym]
+          return error("The command #{@command} does not exist") if not command_class
 
           command_class.new(@subarguments).run()
         end
