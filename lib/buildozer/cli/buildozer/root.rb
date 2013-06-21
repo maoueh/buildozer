@@ -1,4 +1,5 @@
 require 'buildozer/cli/buildozer/build'
+require 'buildozer/cli/buildozer/fetch'
 require 'buildozer/cli/buildozer/package'
 require 'buildozer/cli/core/composite'
 require 'buildozer/version'
@@ -10,21 +11,23 @@ module Buildozer
         def name()
           "buildozer"
         end
-        
+
         def subcommands()
           {
             :build => Cli::Buildozer::Build,
+            :extract => Cli::Buildozer::Extract,
+            :fetch => Cli::Buildozer::Fetch,
             :package => Cli::Buildozer::Package
           }
         end
-        
+
         def options(parser)
           super(parser)
           parser.on_tail("-v", "--version", "Show version") do
             version()
           end
         end
-        
+
         def version()
           puts ::Buildozer::VERSION
           exit(0)
