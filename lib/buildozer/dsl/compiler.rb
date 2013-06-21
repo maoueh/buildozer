@@ -2,6 +2,7 @@ require 'buildozer/dsl/compiler/validator'
 require 'buildozer/dsl/compiler/exceptions'
 require 'buildozer/model/definition'
 require 'buildozer/model/package'
+require 'buildozer/model/source'
 
 module Buildozer
   module Dsl
@@ -21,9 +22,23 @@ module Buildozer
         Validator.validate_definition(definition);
 
         options = definition.options()
-        return Model::Definition.new({
-          :packages => options[:packages].map { |package| compile(package) }
-        })
+
+        # Perform some further compilation
+        options[:source] = compile(options[:source])
+        options[:packages] = options[:packages].map { |package| compile(package) }
+
+        return Model::Definition.new(options)
+      end
+
+      ##
+      # Function that receives a dsl source and compile
+      # it to a model package. This compilation is done
+      # mainly to report user-friendly error when dsl
+      # source is invalid
+      def self.compile_source(source)
+        Validator.validate_source(source);
+
+        return Model::Source.new(source.options())
       end
 
       ##

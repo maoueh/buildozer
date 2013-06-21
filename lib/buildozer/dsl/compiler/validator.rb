@@ -13,9 +13,10 @@ module Buildozer
             raise InvalidDslFragment, "Cannot compile, the argument received is not a dsl fragment"
           end
 
-          compiler = "compile_#{fragment.type()}"
+          type = fragment.type()
+          compiler = "compile_#{type}"
           if not Compiler.respond_to?(compiler)
-            raise InvalidDslFragment, "Does not know how to compile fragment [#{fragment.type()}]"
+            raise InvalidDslFragment, "Does not know how to compile fragment [#{type}]"
           end
         end
 
@@ -26,8 +27,33 @@ module Buildozer
         # For now, exceptions are raised when something is wrong.
         def self.validate_definition(definition)
           options = definition.options()
+          if not options.has_key?(:name)
+            raise InvalidDslDefinition, "Invalid Buildozer definition, must have a 'name'"
+          end
+
+          if not options.has_key?(:version)
+            raise InvalidDslDefinition, "Invalid Buildozer definition, must have a 'version'"
+          end
+
+          if not options.has_key?(:source)
+            raise InvalidDslDefinition, "Invalid Buildozer definition, must have a 'source'"
+          end
+
           if not options.has_key?(:packages) or options[:packages].empty?()
-            raise InvalidDslDefinition, "Invalid definition, must have a least one 'package'"
+            raise InvalidDslDefinition, "Invalid Buildozer definition, must have a least one 'package'"
+          end
+        end
+
+        ##
+        # Receive a dsl source and validates that it is
+        # well-formed.
+        #
+        # For now, exceptions are raised when something is wrong.
+        def self.validate_source(source)
+          options = source.options()
+
+          if not options.has_key?(:url)
+            raise InvalidDslSource, "Invalid source, must have an 'url'"
           end
         end
 
@@ -38,17 +64,9 @@ module Buildozer
         # For now, exceptions are raised when something is wrong.
         def self.validate_package(package)
           options = package.options()
-          if not options.has_key?(:version)
-            raise InvalidDslPackage, "Invalid package, must have a 'version'"
-          end
-
-          if not options.has_key?(:url)
-            raise InvalidDslPackage, "Invalid package, must have an 'url'"
-          end
 
           if options.has_key?(:architecture)
             architecture = options[:architecture]
-
             validate_architecture(architecture)
           end
         end

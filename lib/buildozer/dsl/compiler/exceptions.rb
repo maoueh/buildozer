@@ -7,6 +7,9 @@ module Buildozer
       class InvalidDslDefinition < InvalidDslFragment
       end
 
+      class InvalidDslSource < InvalidDslFragment
+      end
+
       class InvalidDslPackage < InvalidDslFragment
       end
     end

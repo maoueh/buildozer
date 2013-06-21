@@ -18,16 +18,18 @@ module Buildozer
         definition = compile("definition_full.bd.rb")
         assert(definition.instance_of?(Model::Definition))
 
+        assert_equal("erlang", definition.name)
+        assert_equal("R15B03", definition.version)
+        assert_equal("Nu Echo (Matthieu Vachon)", definition.maintainer)
+
+        source = definition.source
+        assert_equal("http://www.erlang.org/download/otp_src_R15B03-1.tar.gz", source.url)
+
         packages = definition.packages
         assert_equal(1, packages.size())
 
         package = packages[0]
-        assert_equal("erlang", package.name)
-        assert_equal("http://www.erlang.org/download/otp_src_R15B03-1.tar.gz", package.url)
-        assert_equal("R15B03", package.version)
-        assert_equal("erlang-R15B03", package.archive)
         assert_equal("i989", package.architecture)
-        assert_equal("Nu Echo (Matthieu Vachon)", package.maintainer)
       end
 
       def test_invalid_fragment_no_type()
