@@ -1,6 +1,6 @@
 require 'buildozer/dsl'
 require 'buildozer/dsl/compiler'
-require 'buildozer/dsl/compiler/exceptions'
+require 'buildozer/dsl/exceptions'
 require 'buildozer/dsl/fragment'
 require 'test/unit'
 
@@ -33,19 +33,19 @@ module Buildozer
       end
 
       def test_invalid_fragment_no_type()
-        assert_raise(Compiler::InvalidDslFragment) do
+        assert_raise(Dsl::InvalidDslFragment) do
           Compiler.compile(FakeFragment.new())
         end
       end
 
       def test_invalid_fragment_unknown_type()
-        assert_raise(Compiler::InvalidDslFragment) do
+        assert_raise(Dsl::InvalidDslFragment) do
           Compiler.compile(FakeFragmentInvalidType.new())
         end
       end
 
       def test_invalid_definition()
-        assert_raise(Compiler::InvalidDslDefinition) do
+        assert_raise(Dsl::InvalidDslDefinition) do
           Compiler.compile(Definition.new())
         end
       end
@@ -67,7 +67,7 @@ module Buildozer
       end
 
       def test_invalid_architecture()
-        assert_raise(Compiler::InvalidDslPackage) do
+        assert_raise(Dsl::InvalidDslPackage) do
           compile("definition_invalid_architecture.bd.rb")
         end
       end

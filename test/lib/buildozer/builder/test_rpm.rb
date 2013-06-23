@@ -8,58 +8,72 @@ module Buildozer
   module Builder
     class TestRpm < Test::Unit::TestCase
       def setup()
-        @defaults = {
+        @definition = {
           :name => "dummy",
           :version => "1.5.2",
+        }
+
+        @source = {
           :url => "http://localhost/archive.tar.gz",
+        }
+
+        @package = {
+          :name => "dummy",
           :includes => ["usr/bin"],
         }
       end
 
-      def base_package(options = {})
-        Model::Package.new(@defaults.merge(options))
+      def base_definition(options = {})
+        source = Model::Source.new(@source.merge(options[:source] || {}))
+        package = Model::Package.new(@package.merge(options[:package] || {}))
+
+        definition = @definition.merge(options[:definition] || {})
+        definition[:source] = source if not definition[:source]
+        definition[:packages] = [package] if not definition[:packages]
+
+        Model::Definition.new(definition)
       end
 
       def test_command_without_architecture()
-        package = base_package()
-        command = Builder::Rpm.new(package, ".").command()
+        definition = base_definition()
+        command = Builder::Rpm.new(definition, definition.packages[0], ".").command()
 
         assert(command !~ /-a/, "Architecture flag [-a] should NOT be present in #{command}")
       end
 
       def test_command_with_architecture()
-        package = base_package({:architecture => "i989"})
-        command = Builder::Rpm.new(package, ".").command()
+        definition = base_definition(:package => {:architecture => "i989"})
+        command = Builder::Rpm.new(definition, definition.packages[0], ".").command()
 
         assert(command =~ /-a "i989"/, "Architecture flag [-a i989] should be present in #{command}")
       end
 
       def test_command_with_architecture_auto()
-        package = base_package({:architecture => :auto})
-        command = Builder::Rpm.new(package, ".").command()
+        definition = base_definition(:package => {:architecture => :auto})
+        command = Builder::Rpm.new(definition, definition.packages[0], ".").command()
 
         assert(command !~ /-a/, "Architecture flag [-a] should NOT be present in #{command}")
       end
 
       def test_command_without_maintainer()
-        package = base_package()
-        command = Builder::Rpm.new(package, ".").command()
+        definition = base_definition()
+        command = Builder::Rpm.new(definition, definition.packages[0], ".").command()
 
         assert(command !~ /-m/, "Maintainer flag [-m] should NOT be present in #{command}")
       end
 
       def test_command_with_maintainer()
-        package = base_package({:maintainer => "Joe Armstrong"})
-        command = Builder::Rpm.new(package, ".").command()
+        definition = base_definition(:definition => {:maintainer => "Joe Armstrong"})
+        command = Builder::Rpm.new(definition, definition.packages[0], ".").command()
 
         assert(command =~ /-m "Joe Armstrong"/, "Maintainer flag [-m Joe Armstrong] should be present in #{command}")
       end
 
       def test_package_no_includes()
-        package = base_package({:includes => []})
+        definition = base_definition(:package => {:includes => []})
 
         assert_raise(Builder::InvalidRpmPackage) do
-          Builder::Rpm.new(package, ".")
+          Builder::Rpm.new(definition, definition.packages[0], ".")
         end
       end
     end

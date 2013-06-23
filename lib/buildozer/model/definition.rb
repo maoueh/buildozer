@@ -5,7 +5,7 @@ module Buildozer
       def initialize(options)
         @name = options.fetch(:name)
         @version = options.fetch(:version)
-        @maintainer = options.fetch(:maintainer)
+        @maintainer = options.fetch(:maintainer, nil)
         @source = options.fetch(:source)
         @packages = options.fetch(:packages)
       end

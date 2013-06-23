@@ -4,7 +4,8 @@ require 'stringio'
 module Buildozer
   module Builder
     class Rpm
-      def initialize(package, directory)
+      def initialize(definition, package, directory)
+        @definition = definition
         @package = package
         @directory = directory
 
@@ -23,12 +24,12 @@ module Buildozer
         buffer = StringIO.new
 
         buffer << "fpm -s dir -t rpm"
-        buffer << " -n \"#{@package.name}\""
-        buffer << " -v \"#{@package.version}\""
+        buffer << " -n \"#{@definition.name}\""
+        buffer << " -v \"#{@definition.version}\""
         buffer << " -C \"#{@directory}\""
         buffer << " -p \"#{name()}\""
 
-        buffer << " -m \"#{@package.maintainer}\"" if @package.maintainer
+        buffer << " -m \"#{@definition.maintainer}\"" if @definition.maintainer
 
         if @package.architecture and not @package.architecture == :auto
           buffer << " -a \"#{@package.architecture}\""
@@ -50,7 +51,7 @@ module Buildozer
       end
 
       def name()
-        "#{@package.archive}_ARCH.rpm"
+        "#{@definition.name}-#{@definition.version}_ARCH.rpm"
       end
 
       def validate()
