@@ -7,7 +7,7 @@ version "1.3.1"
 maintainer "Matthieu Vachon"
 
 source do
-  url "http://downloads.xiph.org/releases/ogg/libogg-1.3.1.tar.gz"
+  from "http://downloads.xiph.org/releases/ogg/libogg-1.3.1.tar.gz"
 end
 
 package "libogg" do

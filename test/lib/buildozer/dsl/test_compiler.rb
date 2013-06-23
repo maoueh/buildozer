@@ -23,7 +23,7 @@ module Buildozer
         assert_equal("Nu Echo (Matthieu Vachon)", definition.maintainer)
 
         source = definition.source
-        assert_equal("http://www.erlang.org/download/otp_src_R15B03-1.tar.gz", source.url)
+        assert_equal("http://www.erlang.org/download/otp_src_R15B03-1.tar.gz", source.from)
 
         packages = definition.packages
         assert_equal(1, packages.size())

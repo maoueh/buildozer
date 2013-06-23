@@ -14,7 +14,7 @@ module Buildozer
         }
 
         @source = {
-          :url => "http://localhost/archive.tar.gz",
+          :from => "http://localhost/archive.tar.gz",
         }
 
         @package = {

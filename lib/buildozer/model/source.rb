@@ -1,10 +1,10 @@
 module Buildozer
   module Model
     class Source
-      attr_accessor :url
+      attr_accessor :from
 
       def initialize(options)
-        @url = options.fetch(:url)
+        @from = options.fetch(:from)
       end
     end
   end

@@ -9,8 +9,8 @@ module Buildozer
         end
       end
 
-      def url(url)
-        @url = url
+      def from(from)
+        @from = from
       end
 
       def archive(archive)

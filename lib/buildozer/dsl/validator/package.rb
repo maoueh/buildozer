@@ -17,10 +17,7 @@ module Buildozer
 
           options = package.options()
 
-          if options.has_key?(:architecture)
-            architecture = options[:architecture]
-            validate_architecture(architecture)
-          end
+          validate_architecture(options[:architecture]) if options[:architecture]
         end
 
         def self.validate_architecture(architecture)

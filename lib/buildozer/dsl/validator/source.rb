@@ -17,8 +17,8 @@ module Buildozer
 
           options = source.options()
 
-          if not options.has_key?(:url)
-            raise InvalidDslSource, "Invalid source, must have an 'url'"
+          if not options.has_key?(:from)
+            raise InvalidDslSource, "Invalid source, must have a 'from' attribute"
           end
         end
       end
