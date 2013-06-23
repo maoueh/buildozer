@@ -23,7 +23,24 @@ module Buildozer
         archive = File.expand_path("#{@destination}/#{find_archive_name(uri)}")
 
         puts "Extracting source archive from #{archive}"
-        Helper::Stream.fetch_url(uri, destination)
+
+      end
+    end
+
+    class ExtractHandler
+      def extract(archive, options = {})
+
+      end
+    end
+
+    class NativeExtractHandler
+      def self.supported?(archive)
+        # FIXME: Check
+        true
+      end
+
+      def extract(archive, options = {})
+
       end
     end
   end

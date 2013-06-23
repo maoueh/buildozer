@@ -1,6 +1,5 @@
-require 'buildozer/cli/buildozer/build'
+require 'buildozer/cli/buildozer/extract'
 require 'buildozer/cli/buildozer/fetch'
-require 'buildozer/cli/buildozer/package'
 require 'buildozer/cli/core/composite'
 require 'buildozer/version'
 
@@ -14,10 +13,8 @@ module Buildozer
 
         def subcommands()
           {
-            :build => Cli::Buildozer::Build,
             :extract => Cli::Buildozer::Extract,
             :fetch => Cli::Buildozer::Fetch,
-            :package => Cli::Buildozer::Package
           }
         end
 
