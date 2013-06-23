@@ -1,6 +1,6 @@
 require 'optparse'
 
-require 'buildozer/cli/core/helper'
+require 'buildozer/helper/string'
 
 module Buildozer
   module Cli
