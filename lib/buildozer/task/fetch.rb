@@ -9,18 +9,10 @@ module Buildozer
       end
 
       def execute()
-        uri = URI.parse(@definition.source.url)
-        destination = File.expand_path("#{@destination}/#{find_archive_name(uri)}")
-        if File.exists?(destination)
-          return
-        end
+        fetcher = @definition.source.fetcher
 
-        puts "Fetching source from #{uri} to #{destination}"
-        Helper::Stream.fetch_url(uri, destination)
-      end
-
-      def find_archive_name(uri)
-        uri.path().split("/").last()
+        puts "Fetching source from #{fetcher.from()}"
+        fetcher.fetch(:destination => @destination)
       end
     end
   end

@@ -1,6 +1,7 @@
 require 'buildozer/builder/exceptions'
 require 'buildozer/builder/rpm'
 require 'buildozer/dsl/compiler'
+require 'buildozer/model/fetcher/url'
 require 'buildozer/model/package'
 require 'test/unit'
 
@@ -14,7 +15,7 @@ module Buildozer
         }
 
         @source = {
-          :from => "http://localhost/archive.tar.gz",
+          :fetcher => Model::Fetcher::Url.new("http://localhost/archive.tar.gz"),
         }
 
         @package = {

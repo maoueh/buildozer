@@ -2,6 +2,7 @@ require 'buildozer/dsl'
 require 'buildozer/dsl/compiler'
 require 'buildozer/dsl/exceptions'
 require 'buildozer/dsl/fragment'
+require 'buildozer/model/fetcher/url'
 require 'test/unit'
 
 module Buildozer
@@ -23,7 +24,8 @@ module Buildozer
         assert_equal("Nu Echo (Matthieu Vachon)", definition.maintainer)
 
         source = definition.source
-        assert_equal("http://www.erlang.org/download/otp_src_R15B03-1.tar.gz", source.from)
+        assert(source.fetcher.kind_of?(Model::Fetcher::Url))
+        assert_equal("http://www.erlang.org/download/otp_src_R15B03-1.tar.gz", source.fetcher.from())
 
         packages = definition.packages
         assert_equal(1, packages.size())
