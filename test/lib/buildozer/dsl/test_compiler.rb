@@ -1,7 +1,7 @@
 require 'buildozer/dsl'
 require 'buildozer/dsl/compiler'
+require 'buildozer/dsl/core/fragment'
 require 'buildozer/dsl/exceptions'
-require 'buildozer/dsl/fragment'
 require 'buildozer/model/fetcher/url'
 require 'test/unit'
 
@@ -48,7 +48,7 @@ module Buildozer
 
       def test_invalid_definition()
         assert_raise(Dsl::InvalidDslDefinition) do
-          Compiler.compile(Definition.new())
+          Compiler.compile(Dsl::Core::Definition.new())
         end
       end
 
@@ -75,13 +75,13 @@ module Buildozer
       end
     end
 
-    class FakeFragment < Fragment
+    class FakeFragment < Dsl::Core::Fragment
       def type()
         return :fragment
       end
     end
 
-    class FakeFragmentInvalidType < Fragment
+    class FakeFragmentInvalidType < Dsl::Core::Fragment
       def type()
         return :element
       end

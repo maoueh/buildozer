@@ -1,10 +1,10 @@
 require 'buildozer/dsl/compiler'
-require 'buildozer/dsl/definition'
+require 'buildozer/dsl/core/definition'
 
 module Buildozer
   module Dsl
     def self.load(filename)
-      definition = Dsl::Definition.new()
+      definition = Dsl::Core::Definition.new()
       definition.instance_eval(File.read(filename), filename)
 
       return definition

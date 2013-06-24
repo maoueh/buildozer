@@ -1,4 +1,4 @@
-require 'buildozer/dsl/definition'
+require 'buildozer/dsl/core/definition'
 require 'buildozer/dsl/exceptions'
 
 module Buildozer
@@ -11,7 +11,7 @@ module Buildozer
          #
          # For now, exceptions are raised when something is wrong.
          def self.validate(definition)
-           if not definition.kind_of?(Dsl::Definition)
+           if not definition.kind_of?(Dsl::Core::Definition)
              raise InvalidDslDefinition, "Cannot validate, the argument received is not a dsl definition"
            end
 

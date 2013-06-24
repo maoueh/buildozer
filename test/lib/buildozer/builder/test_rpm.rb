@@ -3,6 +3,7 @@ require 'buildozer/builder/rpm'
 require 'buildozer/dsl/compiler'
 require 'buildozer/model/fetcher/url'
 require 'buildozer/model/package'
+require 'buildozer/model/source'
 require 'test/unit'
 
 module Buildozer

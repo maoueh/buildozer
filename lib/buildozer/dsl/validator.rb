@@ -14,7 +14,7 @@ module Buildozer
       #
       # For now, exceptions are raised when something is wrong.
       def self.validate(fragment)
-        if not fragment.kind_of?(Fragment) or not fragment.respond_to?(:type)
+        if not fragment.kind_of?(Dsl::Core::Fragment) or not fragment.respond_to?(:type)
           raise InvalidDslFragment, "Cannot validate, the argument received is not a dsl fragment"
         end
 

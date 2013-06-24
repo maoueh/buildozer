@@ -1,4 +1,4 @@
-require 'buildozer/dsl/source'
+require 'buildozer/dsl/core/source'
 require 'buildozer/dsl/exceptions'
 
 module Buildozer
@@ -11,7 +11,7 @@ module Buildozer
         #
         # For now, exceptions are raised when something is wrong.
         def self.validate(source)
-          if not source.kind_of?(Dsl::Source)
+          if not source.kind_of?(Dsl::Core::Source)
             raise InvalidDslSource, "Cannot validate, the argument received is not a dsl source"
           end
 

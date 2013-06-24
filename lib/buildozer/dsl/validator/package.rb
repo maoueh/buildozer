@@ -1,4 +1,4 @@
-require 'buildozer/dsl/package'
+require 'buildozer/dsl/core/package'
 require 'buildozer/dsl/exceptions'
 
 module Buildozer
@@ -11,7 +11,7 @@ module Buildozer
         #
         # For now, exceptions are raised when something is wrong.
         def self.validate(package)
-          if not package.kind_of?(Dsl::Package)
+          if not package.kind_of?(Dsl::Core::Package)
              raise InvalidDslPackage, "Cannot validate, the argument received is not a dsl package"
            end
 
